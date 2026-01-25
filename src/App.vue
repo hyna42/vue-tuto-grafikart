@@ -1,6 +1,9 @@
 <!-- TODOLIST -->
 
 <template>
+  <Button>
+    <strong>Demo</strong> de Bouton
+  </Button>
   <form action="" @submit.prevent="addNewtask">
     <fieldset role="group">
       <input type="text" placeholder="Tâche à effectuer" v-model="taskTitle" />
@@ -38,6 +41,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import Checkbox from "./Checkbox.vue";
+import Button from "./Button.vue";
 
 //liste de tâches
 const taskList = ref([
