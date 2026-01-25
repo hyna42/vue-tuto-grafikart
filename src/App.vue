@@ -13,7 +13,7 @@
   <div v-else>
     <ul>
       <li
-        v-for="task in sortedTasks()"
+        v-for="task in sortedTasks"
         :key="task.date"
         :class="{ completed: task.completed }"
       >
@@ -27,16 +27,19 @@
       <input type="checkbox" v-model="hideCompleted" />
       Masquer les tâches à compléter
     </label>
+    <p v-if="remainingTodos">
+      {{ remainingTodos }} tâche{{ remainingTodos > 1 ? "s" : "" }} à faire
+    </p>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 //liste de tâches
 const taskList = ref([
   { title: "GE Healthcare", completed: false, date: Date.now() },
-  { title: "SOCOFER", completed: true, date: Date.now() },
+  { title: "SOCOFER", completed: false, date: Date.now() },
   { title: "NAT SYSTEM", completed: false, date: Date.now() },
 ]);
 
@@ -58,7 +61,8 @@ const addNewtask = () => {
 };
 
 //filtrer tâches
-const sortedTasks = () => {
+const sortedTasks = computed(() => {
+  console.log("demo");
   const sortedTodos = taskList.value.toSorted((a, b) =>
     a.completed > b.completed ? 1 : -1,
   );
@@ -66,10 +70,13 @@ const sortedTasks = () => {
   if (hideCompleted.value === true) {
     return sortedTodos.filter((t) => t.completed === false);
   }
-  return taskList.value.toSorted((a, b) =>
-    a.completed > b.completed ? 1 : -1,
-  );
-};
+  return sortedTodos;
+});
+
+//nombre de taches a faire
+const remainingTodos = computed(() => {
+  return taskList.value.filter((t) => t.completed === false).length;
+});
 
 //variable pour masquer les tâches cochées
 const hideCompleted = ref(false);
