@@ -1,9 +1,6 @@
 <!-- TODOLIST -->
 
 <template>
-  <Button>
-    <strong>Demo</strong> de Bouton
-  </Button>
   <form action="" @submit.prevent="addNewtask">
     <fieldset role="group">
       <input type="text" placeholder="Tâche à effectuer" v-model="taskTitle" />
@@ -20,18 +17,16 @@
         :key="task.date"
         :class="{ completed: task.completed }"
       >
-        <Checkbox :label="task.title" 
-        @check="(p)=>console.log('coché',p)"
-        @uncheck="console.log('décoché')"
-        v-model="task.completed"
+        <Checkbox
+          :label="task.title"
+          @check="(p) => console.log('coché', p)"
+          @uncheck="console.log('décoché')"
+          v-model="task.completed"
         />
       </li>
     </ul>
 
-    <Checkbox 
-      :label="'Masquer les tâches réalisées'"
-      v-model="hideCompleted"
-    />
+    <Checkbox :label="'Masquer les tâches réalisées'" v-model="hideCompleted" />
     <p v-if="remainingTodos">
       {{ remainingTodos }} tâche{{ remainingTodos > 1 ? "s" : "" }} à faire
     </p>
@@ -39,16 +34,12 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import Checkbox from "./Checkbox.vue";
 import Button from "./Button.vue";
 
 //liste de tâches
-const taskList = ref([
-  { title: "GE Healthcare", completed: false, date: Date.now() },
-  { title: "SOCOFER", completed: false, date: Date.now() },
-  { title: "NAT SYSTEM", completed: false, date: Date.now() },
-]);
+const taskList = ref([]);
 
 //tâche dynamique
 const taskTitle = ref("");
@@ -64,9 +55,17 @@ const addNewtask = () => {
     },
   ];
   taskTitle.value = "";
-  console.log("::::", taskList.value);
 };
+//récupérer la liste des taches depuis une API au montage
+onMounted(() => {
+  fetch("https://jsonplaceholder.typicode.com/todos")
+    .then((r) => r.json())
+    .then(
+      (v) => (taskList.value = v.map((todo) => ({ ...todo, date: todo.id }))),
+    );
+});
 
+console.log("datas :::",taskList)
 //filtrer tâches
 const sortedTasks = computed(() => {
   console.log("demo");

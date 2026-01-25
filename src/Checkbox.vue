@@ -19,5 +19,4 @@ const onChange = (event) => {
     emits("uncheck", event.currentTarget);
   }
 };
-console.log("props", props);
 </script>
