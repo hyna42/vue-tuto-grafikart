@@ -19,7 +19,7 @@ watchEffect(() => {
 });
 
 //creer une fonction qui va permettre d'avoir un timer
-const {time, reset} = useTimer();
+const { time, reset } = useTimer();
 </script>
 
 <style></style>
