@@ -16,7 +16,9 @@
       </li>
     </ul>
     <!-- communiquer la réponse au parent -->
-    <button :disabled="hasAnswer" @click="emits('answer', answer)">Question suivante</button>
+    <button :disabled="hasAnswer" @click="emits('answer', answer)">
+      Question suivante
+    </button>
   </div>
 </template>
 <script setup>
@@ -31,6 +33,7 @@ const answer = ref(null);
 const emits = defineEmits(["answer"]);
 //if answered
 const hasAnswer = computed(() => answer.value === null);
+
 </script>
 
 <style>
