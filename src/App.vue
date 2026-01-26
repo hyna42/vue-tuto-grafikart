@@ -3,12 +3,14 @@
 <template>
   <div v-if="state === 'error'">Impossible de charger les données</div>
   <div :aria-busy="state === 'loading'">
-    {{ quiz }}
+    <!-- {{ quiz }} -->
+    <Quiz :quiz="quiz" v-if="quiz" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
+import Quiz from "./components/Quiz.vue";
 
 const quiz = ref(null);
 const state = ref("loading");
