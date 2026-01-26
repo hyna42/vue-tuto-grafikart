@@ -1,25 +1,33 @@
 <!-- LES WATCHERS -->
 
 <template>
-  <input type="text" v-model="page.title" />
-  Temps écoulé : {{ time }}
-  <button @click="reset">Rest</button>
+  <div v-if="state === 'error'">Impossible de charger les données</div>
+  <div :aria-busy="state === 'loading'">
+    {{ quiz }}
+  </div>
 </template>
 
 <script setup>
-import { ref, watch, watchEffect } from "vue";
-import { useTimer } from "./composable/useTimer";
+import { onMounted, ref } from "vue";
 
-const page = ref({
-  title: "",
+const quiz = ref(null);
+const state = ref("loading");
+onMounted(() => {
+  fetch("http://localhost:5173/public/quiz.json")
+    .then((r) => {
+      if (r.ok) {
+        return r.json();
+      }
+      throw new Error("Impossible de récupérer les données");
+    })
+    .then((data) => {
+      quiz.value = data;
+      state.value = "idle";
+    })
+    .catch((e) => {
+      state.value = "error";
+    });
 });
-
-watchEffect(() => {
-  document.title = page.value.title;
-});
-
-//creer une fonction qui va permettre d'avoir un timer
-const { time, reset } = useTimer();
 </script>
 
 <style></style>
