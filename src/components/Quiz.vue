@@ -3,14 +3,14 @@
     <h1>{{ quiz.title }}</h1>
     <Progress :value="step" :max="quiz.questions.length - 1" />
     <Question
-    :key="step"
+      :key="step"
       :question="question"
       v-if="state === 'question'"
       @answer="addAnswer"
     />
-    <Recap v-if="state === 'recap'" />
+    <Recap v-if="state === 'recap'" :answers="answers" :quiz="quiz"/>
   </div>
-  {{ answers }}
+  <!-- {{ answers }} -->
 </template>
 
 <script setup>
@@ -44,8 +44,6 @@ const addAnswer = (userAnswer) => {
     step.value++; //aller à la step suivante
   }
 };
-
-
 </script>
 
 <style>
