@@ -3,10 +3,11 @@
     <input
       type="radio"
       name="answer"
-      :id="id"
       v-model="model"
+      :id="id"
       :value="value"
       :disabled="disabled"
+      @change="onChange"
     />
     {{ value }}
   </label>
@@ -32,6 +33,13 @@ const classes = computed(() => ({
 }));
 
 const model = defineModel();
+
+const emits = defineEmits(['change'])
+//écoute l'évènement onChange
+const onChange = (event) => {
+    emits("change",event)
+}
+
 </script>
 
 <style>

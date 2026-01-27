@@ -6,21 +6,18 @@
         <Answer
           :id="`answer${index}`"
           :disabled="!hasAnswer"
-          :value="choice"
           v-model="answer"
+          :value="choice"
+          @change="onAnswer"
           :correctAnswer="question.correct_answer"
         />
       </li>
     </ul>
-    <!-- communiquer la réponse au parent -->
-    <button :disabled="hasAnswer" @click="emits('answer', answer)">
-      Question suivante
-    </button>
   </div>
 </template>
 <script setup>
 import { shuffleArray } from "@/functions/array";
-import { computed, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import Answer from "./Answer.vue";
 
 const props = defineProps({
@@ -35,6 +32,31 @@ const hasAnswer = computed(() => answer.value === null);
 
 //random choices
 const randomChoices = computed(() => shuffleArray(props.question.choices));
+
+//use timer for pass automatically in new quesiton after 5 secondes
+let timer;
+
+const onAnswer = () => {
+  clearTimeout(timer)
+  timer = setTimeout(() => {
+    emits("answer", answer.value);
+  },2_000)
+}
+
+
+
+onMounted(() => {
+  timer = setTimeout(() => {
+    // emits("answer", answer.value);
+    answer.value = ''
+    onAnswer()
+  }, 2_000);
+});
+
+onUnmounted(() => {
+  clearTimeout(timer);
+});
+
 </script>
 
 <style>
