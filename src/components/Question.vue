@@ -2,17 +2,14 @@
   <div class="question">
     <h3>{{ question.question }}</h3>
     <ul>
-      <li v-for="(choice, index) in question.choices" :key="choice">
-        <label :for="`answer${index}`">
-          <input
-            type="radio"
-            name="answer"
-            :id="`answer${index}`"
-            v-model="answer"
-            :value="choice"
-          />
-          {{ choice }}
-        </label>
+      <li v-for="(choice, index) in randomChoices" :key="choice">
+        <Answer
+          :id="`answer${index}`"
+          :disabled="!hasAnswer"
+          :value="choice"
+          v-model="answer"
+          :correctAnswer="question.correct_answer"
+        />
       </li>
     </ul>
     <!-- communiquer la réponse au parent -->
@@ -22,7 +19,9 @@
   </div>
 </template>
 <script setup>
+import { shuffleArray } from "@/functions/array";
 import { computed, ref } from "vue";
+import Answer from "./Answer.vue";
 
 const props = defineProps({
   question: Object,
@@ -34,6 +33,8 @@ const emits = defineEmits(["answer"]);
 //if answered
 const hasAnswer = computed(() => answer.value === null);
 
+//random choices
+const randomChoices = computed(() => shuffleArray(props.question.choices));
 </script>
 
 <style>
