@@ -1,35 +1,39 @@
-<!-- LES WATCHERS -->
-
 <template>
-  <div v-if="state === 'error'">Impossible de charger les données</div>
-  <div :aria-busy="state === 'loading'">
-    <!-- {{ quiz }} -->
-    <Quiz :quiz="quiz" v-if="quiz" />
-  </div>
+  <button @click="toggleSpoiler">Afficher / Masquer le spoiler</button>
+  <Transition>
+    <div v-if="showSpoiler" class="spoiler">
+      A la fin de la série Marc Cunningan meurt !
+    </div>
+  </Transition>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import Quiz from "./components/Quiz.vue";
+import { ref } from "vue";
 
-const quiz = ref(null);
-const state = ref("loading");
-onMounted(() => {
-  fetch("http://localhost:5173/public/quiz.json")
-    .then((r) => {
-      if (r.ok) {
-        return r.json();
-      }
-      throw new Error("Impossible de récupérer les données");
-    })
-    .then((data) => {
-      quiz.value = data;
-      state.value = "idle";
-    })
-    .catch((e) => {
-      state.value = "error";
-    });
-});
+const showSpoiler = ref(false);
+
+const toggleSpoiler = () => (showSpoiler.value = !showSpoiler.value);
 </script>
 
-<style></style>
+<style scoped>
+.spoiler {
+  padding: 1rem;
+  border: 1px solid #ffffff58;
+  transition: 0.5s;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
+.v-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+</style>
