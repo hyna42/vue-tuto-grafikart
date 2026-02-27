@@ -2,45 +2,34 @@
   <div class="sidebar">
     <h2>Sidebar</h2>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-    <button class="bonjour">Bonjour</button>
+    <Button>Bonjour</Button>
   </div>
 </template>
 
 <script setup>
+import Button from "./components/Button.vue";
+
 // Rien ici pour l'instant
 </script>
 
 <style scoped>
 h2,
 p {
-  color: black;
+  color: rgb(243, 238, 238);
 }
 .sidebar {
   flex: 1;
   padding: 20px;
-  background: #f7947c;
+  background: #242322;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 2px solid #f3efef;
 }
 
 .bonjour {
   margin-top: 15px;
   padding: 10px;
-  background: #dee2e6;
+  background: #19191a;
   border-radius: 4px;
   text-align: center;
 }
-
-.sidebar button {
-  padding: 8px 16px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* .sidebar button:hover {
-  background: #1b0a20;
-} */
 </style>
