@@ -1,39 +1,58 @@
 <template>
-  <button @click="toggleSpoiler">Afficher / Masquer le spoiler</button>
-  <Transition>
-    <div v-if="showSpoiler" class="spoiler">
-      A la fin de la série Marc Cunningan meurt !
+  <div class="app">
+    <div class="container">
+      <!-- Article à gauche -->
+      <div class="article">
+        <h2>Article</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur voluptatum quos error optio, hic tempora illum voluptas quod vel numquam facere recusandae veniam? Earum assumenda iusto fuga? Laboriosam, architecto cum!</p>
+        <button>Bouton</button>
+      </div>
+
+      <!-- Sidebar à droite -->
+      <Sidebar />
     </div>
-  </Transition>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-const showSpoiler = ref(false);
-
-const toggleSpoiler = () => (showSpoiler.value = !showSpoiler.value);
+import Sidebar from "./Sidebar.vue";
 </script>
 
 <style scoped>
-.spoiler {
-  padding: 1rem;
-  border: 1px solid #ffffff58;
-  transition: 0.5s;
+
+.app {
+  padding: 20px;
+  font-family: sans-serif;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
+h2,p{
+  color: black;
+}
+.container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.v-enter-from {
-  opacity: 0;
-  transform: translateX(10px);
+.article {
+  flex: 2;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
-.v-leave-to {
-  opacity: 0;
-  transform: translateX(-10px);
+.article button {
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.article button:hover {
+  background: #0056b3;
 }
 </style>
