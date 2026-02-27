@@ -10,7 +10,7 @@
           numquam facere recusandae veniam? Earum assumenda iusto fuga?
           Laboriosam, architecto cum!
         </p>
-        <Button>Bouton</Button>
+        <Button :dark="false">Bouton</Button>
       </div>
 
       <!-- Sidebar à droite -->
@@ -22,11 +22,12 @@
 </template>
 
 <script setup>
+import {provide} from "vue"
 import Button from "./components/Button.vue";
 import Sidebar from "./Sidebar.vue";
 import DarkMode from "./DarkMode.vue";
 
-// provide("darkMode", false);
+provide("darkMode", false);
 
 </script>
 

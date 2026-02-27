@@ -10,13 +10,8 @@
 import { inject } from "vue";
 import Button from "./components/Button.vue";
 
-// Rien ici pour l'instant
-
-const darkMode = inject("darkMode");
-const toggleDarkMode = () => {
-  darkMode.value = !darkMode.value;
-  console.log(":::",darkMode.value)
-};
+// const darkMode = inject("darkMode");
+const {toggleDarkMode} = inject("darkMode");
 </script>
 
 <style scoped>

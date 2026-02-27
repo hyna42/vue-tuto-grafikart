@@ -10,7 +10,7 @@ import { computed, inject, unref } from "vue";
 const props = defineProps({
   dark: Boolean,
 });
-const darkMode = inject('darkMode')
+const {darkMode} = inject('darkMode')
 
 const classes = computed(() => ({
     btn: true,
