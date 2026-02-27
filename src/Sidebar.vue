@@ -2,14 +2,21 @@
   <div class="sidebar">
     <h2>Sidebar</h2>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-    <Button>Bonjour</Button>
+    <Button @click="toggleDarkMode">Bonjour</Button>
   </div>
 </template>
 
 <script setup>
+import { inject } from "vue";
 import Button from "./components/Button.vue";
 
 // Rien ici pour l'instant
+
+const darkMode = inject("darkMode");
+const toggleDarkMode = () => {
+  darkMode.value = !darkMode.value;
+  console.log(":::",darkMode.value)
+};
 </script>
 
 <style scoped>

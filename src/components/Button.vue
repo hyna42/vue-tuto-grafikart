@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { computed, inject } from "vue";
+import { computed, inject, unref } from "vue";
 
 const props = defineProps({
   dark: Boolean,
@@ -14,11 +14,11 @@ const darkMode = inject('darkMode')
 
 const classes = computed(() => ({
     btn: true,
-    dark: props.dark || darkMode,
+    dark: props.dark || unref(darkMode),
 }));
 
 //inject darkMode
-console.log('darkMode ==>',darkMode)
+console.log('inject darkMode ==>',darkMode)
 </script>
 
 <style>

@@ -3,7 +3,8 @@
 </template>
 
 <script setup>
-import { provide } from "vue";
-
-provide("darkMode", true);
+import { provide, ref } from "vue";
+const darkMode = ref(true)
+provide("darkMode", darkMode);
+console.log(":::",darkMode.value)
 </script>

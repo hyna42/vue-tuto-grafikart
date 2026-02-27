@@ -27,6 +27,7 @@ import Sidebar from "./Sidebar.vue";
 import DarkMode from "./DarkMode.vue";
 
 // provide("darkMode", false);
+
 </script>
 
 <style scoped>
