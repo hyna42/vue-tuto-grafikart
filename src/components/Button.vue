@@ -21,7 +21,7 @@ const classes = computed(() => ({
 console.log('inject darkMode ==>',darkMode)
 </script>
 
-<style>
+<style scoped>
 .btn {
   color: #fff;
   background-color: #680303;
