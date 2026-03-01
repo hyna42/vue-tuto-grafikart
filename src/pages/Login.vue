@@ -33,16 +33,19 @@
 </template>
 
 <script setup>
+import { useAuth } from '@/store/auth'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const username = ref('')
 const password = ref('')
 const router = useRouter()
+const store = useAuth()
 
 const handleLogin = () => {
   if (username.value && password.value) {
-    console.log('Connecté:', username.value)
+    store.authentificate()
+    console.log('Connecté:', store.user)
     router.push('/')
   }
 }
