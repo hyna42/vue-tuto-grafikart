@@ -5,6 +5,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/about">About</router-link>
       <router-link to="/contact">Contact</router-link>
+      <router-link to="/login" class="btn-login">Se connecter</router-link>
     </nav>
 
     <!-- Page actuelle -->
@@ -36,5 +37,15 @@ nav a {
 
 nav a.router-link-active {
   background: #0ea5e9;
+}
+
+.btn-login{
+   background: #0ea5e9 !important;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-left: auto;
+}
+.btn-login:hover {
+  background: #0284c7 !important;
 }
 </style>
