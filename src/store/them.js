@@ -9,4 +9,4 @@ export const useTheme = defineStore("theme", () => {
   };
 
   return { isDark: darkTheme, swithTheme };
-});
+},{persist:true});
