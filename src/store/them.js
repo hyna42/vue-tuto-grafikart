@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export const useAuth = defineStore("theme", () => {
+export const useTheme = defineStore("theme", () => {
   const darkTheme = ref(false);
 
   const swithTheme = () => {

@@ -6,7 +6,7 @@ export const useAuth = defineStore('auth', () => {
     
     const authentificate = () => {
         user.value = {
-            usename: 'John Doe'
+            username: 'Baye Niass'
         }
     }
 
